@@ -32,7 +32,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('unit.manage');
+        return view('content.unit.manage');
     }
 
     /**

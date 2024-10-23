@@ -32,7 +32,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('brand.manage');
+        return view('content.brand.manage');
     }
 
     /**
@@ -114,4 +114,5 @@ class BrandController extends Controller
             ], 201);
         }
     }
+    
 }

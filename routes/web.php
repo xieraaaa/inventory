@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
@@ -49,5 +50,7 @@ Route::prefix('brand')->group(function () {
     Route::get('/edit/{id}',[BrandController::class,'edit']);
     Route::post('/update/{id}', [BrandController::class, 'update']);
     Route::get('/delete/{id}',[BrandController::class,'destroy']);
+    
 });
 
+Route::get('/', [Dashboard::class, 'index'])->name('dashboard.index');
