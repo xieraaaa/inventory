@@ -15,4 +15,6 @@ class unit extends Model
         'nama_unit',
         'code_unit',
     ];
+
+    
 }

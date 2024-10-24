@@ -40,22 +40,25 @@
                 <h5 class="modal-title" id="addKategoriModalLabel">Add New Kategori</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <!-- Input Nama Kategori -->
-                <input value="{{ old('nama_kategori') }}" type="text" class="mt-3 form-control nama_kategori" placeholder="Enter Kategori Name">
-                <span class="text-danger error_nama_kategori"></span>
+            <form id="addKategoriForm">
+                <div class="modal-body">
+                    <!-- Input Nama Kategori -->
+                    <input value="{{ old('nama_kategori') }}" type="text" class="mt-3 form-control nama_kategori" placeholder="Enter Kategori Name">
+                    <span class="text-danger error_nama_kategori"></span>
 
-                <!-- Input Code Kategori -->
-                <input value="{{ old('code_kategori') }}" type="text" class="mt-3 form-control code_kategori" placeholder="Enter Kategori Code">
-                <span class="text-danger error_code_kategori"></span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button class="btn btn-success" id="btnSave">Save</button>
-            </div>
+                    <!-- Input Code Kategori -->
+                    <input value="{{ old('code_kategori') }}" type="text" class="mt-3 form-control code_kategori" placeholder="Enter Kategori Code">
+                    <span class="text-danger error_code_kategori"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" id="btnSave">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 
 
 
@@ -93,43 +96,49 @@
     </div> -->
 
     
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Kategori</h5>
-                </div>
+   <!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Kategori</h5>
+            </div>
+            <form id="editKategoriForm">
                 <div class="modal-body">
-                    <input id="nama_kategori" type="text" class="mt-3 form-control">
-                    <input id="code_kategori" type="text" class="mt-3 form-control">
+                    <input id="nama_kategori" type="text" class="mt-3 form-control" placeholder="Enter Kategori Name">
+                    <input id="code_kategori" type="text" class="mt-3 form-control" placeholder="Enter Kategori Code">
                     <span class="text-danger" id="error_nama_kategori"></span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button value="" type="button" class="btn-update btn btn-success">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn-update btn btn-success">Update</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Confirmation Message</h5>
-                </div>
+
+   <!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation Message</h5>
+            </div>
+            <form id="deleteKategoriForm">
                 <div class="modal-body">
                     Are you sure want to delete this Kategori?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <button value="" type="button" class="delete btn btn-danger">Yes</button>
+                    <button type="submit" class="delete btn btn-danger">Yes</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
+
     </div>
 @endsection
 
@@ -178,7 +187,8 @@
                     data: {
                         nama_kategori: nama_kategori,
                         code_kategori: code_kategori
-                    },
+
+                    },                  
                     success: function(response) {
                         table.ajax.reload();
                         jQuery(".error_nama_kategori").text("");

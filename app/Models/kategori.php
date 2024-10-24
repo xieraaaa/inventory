@@ -16,4 +16,6 @@ class kategori extends Model
         'nama_kategori',
         'code_kategori',
     ];
+
+    
 }

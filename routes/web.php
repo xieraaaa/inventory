@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,5 +53,7 @@ Route::prefix('brand')->group(function () {
     Route::get('/delete/{id}',[BrandController::class,'destroy']);
     
 });
+
+
 
 Route::get('/', [Dashboard::class, 'index'])->name('dashboard.index');

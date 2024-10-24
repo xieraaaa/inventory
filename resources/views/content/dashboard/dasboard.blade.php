@@ -1,9 +1,4 @@
-@extends('layouts.app')
-@push('styles')
-        <!-- chartist CSS -->
-
-
-@endpush
+@extends('layouts.app') 
 @section('content')
         <!-- ============================================================== -->
         <!-- Page wrapper  -->

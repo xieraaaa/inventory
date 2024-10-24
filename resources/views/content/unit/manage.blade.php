@@ -32,30 +32,33 @@
     </div>
 </div>
 
-<!-- Modal for Adding New unit -->
-<div class="modal fade" id="addunitModal" tabindex="-1" aria-labelledby="addunitModalLabel" aria-hidden="true">
+<!-- Modal for Adding New Unit -->
+<div class="modal fade" id="addunitModal" tabindex="-1" aria-labelledby="addUnitModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addunitModalLabel">Add New unit</h5>
+                <h5 class="modal-title" id="addUnitModalLabel">Add New Unit</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <!-- Input Nama unit -->
-                <input value="{{ old('nama_unit') }}" type="text" class="mt-3 form-control nama_unit" placeholder="Enter unit Name">
-                <span class="text-danger error_nama_unit"></span>
+            <form id="addUnitForm">
+                <div class="modal-body">
+                    <!-- Input Nama Unit -->
+                    <input value="{{ old('nama_unit') }}" type="text" class="mt-3 form-control nama_unit" placeholder="Enter Unit Name">
+                    <span class="text-danger error_nama_unit"></span>
 
-                <!-- Input Code unit -->
-                <input value="{{ old('code_unit') }}" type="text" class="mt-3 form-control code_unit" placeholder="Enter unit Code">
-                <span class="text-danger error_code_unit"></span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button class="btn btn-success" id="btnSave">Save</button>
-            </div>
+                    <!-- Input Code Unit -->
+                    <input value="{{ old('code_unit') }}" type="text" class="mt-3 form-control code_unit" placeholder="Enter Unit Code">
+                    <span class="text-danger error_code_unit"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" id="btnSave">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 
 
 
@@ -93,25 +96,32 @@
     </div> -->
 
     
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit unit</h5>
-                </div>
+  <!-- Edit Unit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Unit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="editUnitForm">
                 <div class="modal-body">
-                    <input id="nama_unit" type="text" class="mt-3 form-control">
-                    <input id="code_unit" type="text" class="mt-3 form-control">
+                    <!-- Input Nama Unit -->
+                    <input id="nama_unit" type="text" class="mt-3 form-control" placeholder="Enter Unit Name">
                     <span class="text-danger" id="error_nama_unit"></span>
+
+                    <!-- Input Code Unit -->
+                    <input id="code_unit" type="text" class="mt-3 form-control" placeholder="Enter Unit Code">
+                    <span class="text-danger" id="error_code_unit"></span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button value="" type="button" class="btn-update btn btn-success">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn-update btn btn-success">Update</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
     <!-- Delete Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

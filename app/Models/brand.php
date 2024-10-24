@@ -15,4 +15,6 @@ class brand extends Model
         'nama_brand',
         'code_brand',
     ];
+
+    
 }

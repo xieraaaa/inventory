@@ -23,7 +23,7 @@
                         <li> <a class="waves-effect waves-dark" href="#"><i class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a>
                         <li> <a class="waves-effect waves-dark" href="#"><i class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-layout-grid2"></i><span class="hide-menu">Setting</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings"></i><span class="hide-menu">Setting</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('kategori.create')}}">Kategori</a></li>
                                 <li><a href="{{route('brand.create')}}">Brand</a></li>
