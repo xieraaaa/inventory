@@ -78,6 +78,18 @@ class BrandController extends Controller
     {
         $brand = brand::where('id', $request->id)->delete();
 
-        return Response()->json($brand);
+        
+        if (!$brand) {
+            return response()->json([
+                "status" => "failed",
+                "msg" => "Something went wrong!"
+            ], 210);
+        } else {
+            return response()->json([
+                "status" => "success",
+                "msg" => "Product Deleted Successfully"
+            ], 201);
+        }
     }
+    
 }
