@@ -16,5 +16,4 @@ class brand extends Model
         'code_brand',
     ];
 
-    
 }

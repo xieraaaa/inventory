@@ -4,114 +4,80 @@ namespace App\Http\Controllers;
 
 use App\Models\kategori;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
+
+use Datatables;
 
 class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->ajax()) {
-            $data = kategori::latest()->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $btn = '<button data-bs-toggle="modal" data-bs-target="#editModal" class="btn-edit btn btn-info btn-sm" value="' . $row->id . '"><i class="fa fa-edit"></i></button> ';
-                    $btn .= '<button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn-delete btn btn-danger btn-sm" value="' . $row->id . '"><i class="fa fa-trash"></i></button>';
-                    return $btn;
-                })
+        if (request()->ajax()) {
+            //return datatables()->of(kategori::select('*'))
+            return datatables()->of(kategori::select('id', 'nama_kategori', 'code_kategori'))
+                ->addColumn('action', 'content.kategori.kategori-action')
                 ->rawColumns(['action'])
+                ->addIndexColumn()
                 ->make(true);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
         return view('content.kategori.index');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $kategoriId = $request->id;
+
         $request->validate([
-            'nama_kategori' => ['required'],
-            'code_kategori' => ['required']
+            'nama_kategori' => 'required',
+            'code_kategori' => 'required'
         ]);
 
-        kategori::create([
-            'nama_kategori' => $request->nama_kategori,
-            'code_kategori' => $request->code_kategori,
-        ]);
+        $kategori = kategori::updateOrCreate(
+            [
+                'id' => $kategoriId
+            ],
+            [
+                'nama_kategori' => $request->nama_kategori,
+                'code_kategori' => $request->code_kategori
+            ]
+        );
 
-        return response()->json([
-            "status" => "Product Saved Successfully"
-        ], 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return Response()->json($kategori);
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param  \App\kategori  $kategori
+     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $kategori = Kategori::findOrFail($id);
-        return response()->json(['kategori' => $kategori]);
+        $where = array('id' => $request->id);
+        $kategori  = kategori::where($where)->first();
+
+        return Response()->json($kategori);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'nama_kategori' => ['required'],
-            'code_kategori' => ['required']
-        ]);
-
-        $kategori = kategori::find($id);
-        $kategori->nama_kategori = $request->nama_kategori;
-        $kategori->code_kategori = $request->code_kategori;
-        
-
-        $kategori->update();
-
-        return response()->json([
-            "status" => "KATEGORI Updated Successfully"
-        ], 201);
-    }
-
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  \App\kategori  $kategori
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $kategori = kategori::find($id);
-        $kategori->delete();
+        $kategori = kategori::where('id', $request->id)->delete();
 
-        if (!$kategori) {
-            return response()->json([
-                "status" => "failed",
-                "msg" => "Something went wrong!"
-            ], 210);
-        } else {
-            return response()->json([
-                "status" => "success",
-                "msg" => "Product Deleted Successfully"
-            ], 201);
-        }
+        return Response()->json($kategori);
     }
 }

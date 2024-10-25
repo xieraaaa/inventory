@@ -4,114 +4,80 @@ namespace App\Http\Controllers;
 
 use App\Models\unit;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
+
+use Datatables;
 
 class UnitController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->ajax()) {
-            $data = unit::latest()->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $btn = '<button data-bs-toggle="modal" data-bs-target="#editModal" class="btn-edit btn btn-info btn-sm" value="' . $row->id . '"><i class="fa fa-edit"></i></button> ';
-                    $btn .= '<button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn-delete btn btn-danger btn-sm" value="' . $row->id . '"><i class="fa fa-trash"></i></button>';
-                    return $btn;
-                })
+        if (request()->ajax()) {
+            //return datatables()->of(unit::select('*'))
+            return datatables()->of(unit::select('id', 'nama_unit', 'code_unit'))
+                ->addColumn('action', 'content.unit.unit-action')
                 ->rawColumns(['action'])
+                ->addIndexColumn()
                 ->make(true);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
         return view('content.unit.manage');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $unitId = $request->id;
+
         $request->validate([
-            'nama_unit' => ['required'],
-            'code_unit' => ['required']
+            'nama_unit' => 'required',
+            'code_unit' => 'required'
         ]);
 
-        unit::create([
-            'nama_unit' => $request->nama_unit,
-            'code_unit' => $request->code_unit,
-        ]);
+        $unit = unit::updateOrCreate(
+            [
+                'id' => $unitId
+            ],
+            [
+                'nama_unit' => $request->nama_unit,
+                'code_unit' => $request->code_unit
+            ]
+        );
 
-        return response()->json([
-            "status" => "unit Saved Successfully"
-        ], 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return Response()->json($unit);
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param  \App\unit  $unit
+     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $unit = unit::findOrFail($id);
-        return response()->json(['unit' => $unit]);
+        $where = array('id' => $request->id);
+        $unit  = unit::where($where)->first();
+
+        return Response()->json($unit);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'nama_unit' => ['required'],
-            'code_unit' => ['required']
-        ]);
-
-        $unit = unit::find($id);
-        $unit->nama_unit = $request->nama_unit;
-        $unit->code_unit = $request->code_unit;
-        
-
-        $unit->update();
-
-        return response()->json([
-            "status" => "unit Updated Successfully"
-        ], 201);
-    }
-
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  \App\unit  $unit
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $unit = unit::find($id);
-        $unit->delete();
+        $unit = unit::where('id', $request->id)->delete();
 
-        if (!$unit) {
-            return response()->json([
-                "status" => "failed",
-                "msg" => "Something went wrong!"
-            ], 210);
-        } else {
-            return response()->json([
-                "status" => "success",
-                "msg" => "Product Deleted Successfully"
-            ], 201);
-        }
+        return Response()->json($unit);
     }
 }

@@ -1,332 +1,184 @@
-@extends('layouts.app')
 
-@section('content')
+        @extends('layouts.app')
 
-<div class="page-wrapper">
-<div class="container">
-    <div class="row mt-2">
-        <div class="col-md-12">
-            <div class="card">
+        @section('content')
+        <div class="page-wrapper">
+            <div class="container mt-2">
+        
+                <div class="row">
+                    <div class="col-lg-12 margin-tb">
+                        <div class="pull-left">
+                            <h2>kategori</h2>
+                        </div>
+                        <div class="pull-right mb-2">
+                            <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Create kategori</a>
+                        </div>
+                    </div>
+                </div>
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
                 <div class="card-body">
-                    <!-- Tambah Kategori Button -->
-                    <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addKategoriModal">
-                        Tambah Kategori
-                    </button>
-
-                    <!-- Kategori Table -->
-                    <table class="table table-striped table-bordered yajra-datatable">
+                    <table class="table table-bordered" id="kategori">
                         <thead>
                             <tr>
-                                <th>ID Kategori</th>
-                                <th>Nama Kategori</th>
-                                <th>Code Kategori</th>
-                                <th width="150px">Action</th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>code_kategori</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for Adding New Kategori -->
-<div class="modal fade" id="addKategoriModal" tabindex="-1" aria-labelledby="addKategoriModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addKategoriModalLabel">Add New Kategori</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="addKategoriForm">
-                <div class="modal-body">
-                    <!-- Input Nama Kategori -->
-                    <input value="{{ old('nama_kategori') }}" type="text" class="mt-3 form-control nama_kategori" placeholder="Enter Kategori Name">
-                    <span class="text-danger error_nama_kategori"></span>
-
-                    <!-- Input Code Kategori -->
-                    <input value="{{ old('code_kategori') }}" type="text" class="mt-3 form-control code_kategori" placeholder="Enter Kategori Code">
-                    <span class="text-danger error_code_kategori"></span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success" id="btnSave">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-
-
-    <!-- <div class="container">
-        <div class="row mt-2">
-            <div class="col-md-4">
-                <div class="card">
-                    <h5 class="card-header text-success text-center">Add New Kategori</h5>
-                    <div class="card-body">
-                        <input value="{{ old('nama_kategori') }}" type="text" class="mt-3 form-control nama_kategori" placeholder="Enter Kategori Name">
-                        <span class="text-danger error_nama_kategori"></span>
-                        <button class="btn btn-success form-control mt-3" id="btnSave">Save</button>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-striped table-bordered yajra-datatable">
-                            <thead>
-                                <tr>
-                                    <th>#Sl</th>
-                                    <th>Nama Kategori</th>
-                                    <th width="150px">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+            <!-- boostrap kategori model -->
+            <div class="modal fade" id="kategori-modal" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="kategoriModal"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="javascript:void(0)" id="kategoriForm" name="kategoriForm" class="form-horizontal"
+                                method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="id" id="id">
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">Name</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="nama_kategori" name="nama_kategori"
+                                            placeholder="kategori name" maxlength="50" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">Kode</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="code_kategori" name="code_kategori"
+                                            placeholder="code_kategori of kategori" maxlength="50" required="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary" id="btn-save">Save changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div> -->
+            <!-- end bootstrap model -->
+                
 
+    </div>
+           
+        @endsection
+
+        @push('scripts')
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                    
+                });
+                $('#kategori').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ url('kategori') }}",
+                    columns: [{
+                            data: 'id',
+                            name: 'id'
+                        },
+                        {
+                            data: 'nama_kategori',
+                            name: 'nama_kategori'
+                        },
+                        {
+                            data: 'code_kategori',
+                            name: 'code_kategori'
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false
+                        },
+                    ],
+                    order: [
+                        [0, 'desc']
+                    ]
+                });
+            });
     
-   <!-- Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Kategori</h5>
-            </div>
-            <form id="editKategoriForm">
-                <div class="modal-body">
-                    <input id="nama_kategori" type="text" class="mt-3 form-control" placeholder="Enter Kategori Name">
-                    <input id="code_kategori" type="text" class="mt-3 form-control" placeholder="Enter Kategori Code">
-                    <span class="text-danger" id="error_nama_kategori"></span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn-update btn btn-success">Update</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+            function add() {
+                $('#kategoriForm').trigger("reset");
+                $('#kategoriModal').html("Add kategori");
+                $('#kategori-modal').modal('show');
+                $('#id').val('');
+            }
+    
+            function editFunc(id) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('edit-kategori') }}",
+                    data: {
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        $('#kategoriModal').html("Edit kategori");
+                        $('#kategori-modal').modal('show');
+                        $('#id').val(res.id);
+                        $('#nama_kategori').val(res.nama_kategori);
+                        $('#code_kategori').val(res.code_kategori);
+                    }
+                });
+            }
+    
+            function deleteFunc(id) {
+                if (confirm("Delete record?") == true) {
+                    var id = id;
+                    // ajax
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('delete-kategori') }}",
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            $('#kategori').DataTable().ajax.reload(null, false);
 
-
-   <!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmation Message</h5>
-            </div>
-            <form id="deleteKategoriForm">
-                <div class="modal-body">
-                    Are you sure want to delete this Kategori?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <button type="submit" class="delete btn btn-danger">Yes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-    </div>
-@endsection
-
-@push('scripts')
-    <script>
-        jQuery(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
                 }
-            });
-
-            // Show Kategori List with Yajra Datatable
-            var table = $('.yajra-datatable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('index') }}",
-                columns: [
-                    { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-                    { data: 'nama_kategori', name: 'nama_kategori' },
-                    { data: 'code_kategori', name: 'code_kategori' },
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
-                ],
-                columnDefs: [
-                    {
-                        targets: '_all',
-                        className: 'text-center'
-                    }
-                ]
-            });
-
-            // Kategori Insert
-            jQuery("#btnSave").click(function() {
-                var nama_kategori = jQuery(".nama_kategori").val();
-                var code_kategori = jQuery(".code_kategori").val();
-
-                if (nama_kategori === "" || code_kategori === "") {
-            alert('Nama Kategori dan Code Kategori harus diisi!');
-            return;
-        }
-
+            }
+            $('#kategoriForm').submit(function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
                 $.ajax({
-                    url: "{{ route('kategori.store') }}",
-                    type: "POST",
-                    dataType: "JSON",
-                    data: {
-                        nama_kategori: nama_kategori,
-                        code_kategori: code_kategori
-
-                    },                  
-                    success: function(response) {
-                        table.ajax.reload();
-                        jQuery(".error_nama_kategori").text("");
-                        jQuery(".error_code_kategori").text("");
-                        jQuery(".nama_kategori").val("");
-                        jQuery(".code_kategori").val("");
-                        swal({
-                            title: "Success!",
-                            text: response.status,
-                            icon: "success",
-                            timer: 2000,
-                            button: false,
-                        });
+                    type: 'POST',
+                    url: "{{ url('store-kategori') }}",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        $("#kategori-modal").modal('hide');
+                        $('#kategori').DataTable().ajax.reload(null, false);
+                        $("#btn-save").html('Submit');
+                        $("#btn-save").attr("disabled", false);
                     },
-                    error: function(error) {
-                        if (error) {
-                            jQuery(".error_nama_kategori").text(error.responseJSON.errors.nama_kategori);
-                            jQuery(".error_code_kategori").text(error.responseJSON.errors.code_kategori);
-                        }
+                    error: function(data) {
+                        console.log(data);
                     }
                 });
             });
-
-            // Kategori Edit
-            jQuery(document).on("click", ".btn-edit", function(e) {
-                var id = jQuery(this).val();
-                jQuery(".btn-update").val(id);
-
-                var baseUrl = `{{ url('/') }}`
-                var urlEdit = baseUrl + '/kategori/edit/'+id;
-
-                $.ajax({
-                    url: urlEdit,
-                    type: "GET",
-                    dataType: "JSON",
-                    success: function(response) {
-                        jQuery("#nama_kategori").val(response.kategori.nama_kategori);
-                        jQuery("#code_kategori").val(response.kategori.code_kategori);
-                    }
-                });
-            });
-
-            // Kategori Update
-            jQuery(document).on("click", ".btn-update", function(e) {
-                var id = jQuery(this).val();
-
-                var nama_kategori = jQuery("#nama_kategori").val();
-                var code_kategori = jQuery("#code_kategori").val();
-
-                var baseUrl = `{{ url('/') }}`
-                var urlUpdate = baseUrl + '/kategori/update/'+id;
-
-                $.ajax({
-                    url: urlUpdate,
-                    type: "POST",
-                    dataType: "JSON",
-                    data: {
-                       
-                        nama_kategori: nama_kategori,
-                        code_kategori: code_kategori
-                    },
-                    success: function(response) {
-                        table.ajax.reload();
-                        jQuery("#editModal").modal("hide");
-                        jQuery("#error_nama_kategori").text("");
-                        jQuery("#error_code_kategori").text("");
-                        jQuery("#nama_kategori").val("");
-                        jQuery("#code_kategori").val("");
-                        swal({
-                            title: "Success!",
-                            text: response.status,
-                            icon: "info",
-                            timer: 2000,
-                            button: false,
-                        });
-                    },
-                    error: function(error) {
-                        if (error) {
-                            jQuery("#error_nama_kategori").text(error.responseJSON.errors.nama_kategori);
-                            jQuery("#error_code_kategori").text(error.responseJSON.errors.code_kategori);
-                        }
-                    }
-                });
-            });
+        </script>
+        @endpush
 
 
-            // Listen for the modal being hidden
-            jQuery("#editModal").on("hidden.bs.modal", function () {
-                jQuery("#nama_kategori").val("");
-                jQuery("#code_kategori").val("");
-                jQuery("#nama_kategori").text("");
-                jQuery("#code_kategori").text("");
-            });
 
-            // Kategori Delete
-            jQuery(document).on("click", ".btn-delete", function (e) {
-                var id = jQuery(this).val();
-                jQuery(".delete").val(id);
-            });
-
-            jQuery(document).on("click", ".delete", function (e) {
-                var id = jQuery(this).val();
-
-                var baseUrl = `{{ url('/') }}`
-                var urlDelete = baseUrl + '/kategori/delete/'+id;
-
-        $.ajax({        
-                    url: urlDelete,
-                    type: "GET",
-                    dataType: "JSON",
-                    success: function (response) {
-                        if (response.status != "success") {
-                            table.ajax.reload();
-                            jQuery("#delete").modal("hide");
-                            //swal ( "Oops!" ,  response.msg ,  "error" );
-                            swal({
-                                title: "Oops!",
-                                text: response.msg,
-                                icon: "error",
-                                timer: 2000,
-                                button: false,
-                            });
-                        }
-                        else {
-                            table.ajax.reload();
-                            jQuery("#deleteModal").modal("hide");
-                            //swal("Success!", response.msg, "warning");
-                            swal({
-                                title: "Success!",
-                                text: response.msg,
-                                icon: "warning",
-                                timer: 2000,
-                                button: false,
-                            });
-                        }    
-                    }
-                });
-            });
-        });
-    </script>
-@endpush

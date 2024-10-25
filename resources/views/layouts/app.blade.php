@@ -443,13 +443,13 @@
     <script src="{{ asset('dist/js/custom.min.js') }}"></script>      <!-- ============================================================== -->  <!-- This page plugins -->
         <!-- ============================================================== -->
         <!--morris JavaScript -->
-        <script src="{{asset('../assets/node_modules/raphael/raphael-min.js')}}"></script>
+        {{-- <script src="{{asset('../assets/node_modules/raphael/raphael-min.js')}}"></script>
         <script src="{{asset('../assets/node_modules/morrisjs/morris.min.js')}}"></script>
         <script src="{{asset('../assets/node_modules/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
         <!-- Popup message jquery -->
-        <script src="{{asset('../assets/node_modules/toast-master/js/jquery.toast.js')}}"></script>
+        <script src="{{asset('../assets/node_modules/toast-master/js/jquery.toast.js')}}"></script> --}}
         <!-- Chart JS -->
-        <script src="{{asset('dist/js/dashboard1.js')}}"></script>
+        {{-- <script src="{{asset('dist/js/dashboard1.js')}}"></script> --}}
 
        
         <script src="https://cdn.datatables.net/2.1.3/js/dataTables.min.js"></script>

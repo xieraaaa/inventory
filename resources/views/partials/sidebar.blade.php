@@ -25,9 +25,9 @@
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings"></i><span class="hide-menu">Setting</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{route('kategori.create')}}">Kategori</a></li>
-                                <li><a href="{{route('brand.create')}}">Brand</a></li>
-                                <li><a href="{{route('unit.create')}}">Unit</a></li>
+                                <li><a href="{{route('kategori')}}">Kategori</a></li>
+                                <li><a href="{{route('brand')}}">Brand</a></li>
+                                <li><a href="{{route('unit')}}">Unit</a></li>
                             </ul>
                         </li>
                 </nav>
