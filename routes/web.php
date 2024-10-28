@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\productController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,11 @@ Route::get('brand', [BrandController::class, 'index'])->name('brand');
 Route::post('store-brand', [BrandController::class, 'store']);
 Route::post('edit-brand', [BrandController::class, 'edit']);
 Route::post('delete-brand', [BrandController::class, 'destroy']);
+
+Route::get('product', [productController::class, 'index'])->name('product');
+Route::post('store-product', [productController::class, 'store']);
+Route::post('edit-product', [productController::class, 'edit']);
+Route::post('delete-product', [productController::class, 'destroy']);
 
 
 

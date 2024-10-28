@@ -23,6 +23,7 @@ class KategoriController extends Controller
                 ->rawColumns(['action'])
                 ->addIndexColumn()
                 ->make(true);
+                
         }
         return view('content.kategori.index');
     }
