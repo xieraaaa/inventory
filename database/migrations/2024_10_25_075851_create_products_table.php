@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kategori');
             $table->unsignedBigInteger('id_unit');
             $table->decimal('price', 10,2);
-            $table->text('image')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
 
 

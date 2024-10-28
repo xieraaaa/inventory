@@ -14,9 +14,9 @@
             </div>
         </div>
         @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <p>{{ $message }}</p>
-            </div>
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
         @endif
         <div class="card-body">
             <table class="table table-striped table-bordered yajra-datatable" id="product">
@@ -79,47 +79,47 @@
                             </div>
                         </div>
                         <div class="form-group">
-                           <label for="barcode" class="col-sm-2 control-label">Barcode</label>
-                           <div class="col-sm-12">
-                                <select class="form-control" id="barcode" name="barcode" required>
-                                  <option value="">-- Select Barcode Type --</option>
-                                  <option value="Code25">Code25</option>
-                                  <option value="Code39">Code39</option>
-                                  <option value="Code128">Code128</option>
-                                </select>
-                       </div>
-                          </div>
-                        <div class="form-group">
-                            <label for="id_brand" class="col-sm-2 control-label">id_brand</label>
+                            <label for="barcode" class="col-sm-2 control-label">Barcode</label>
                             <div class="col-sm-12">
-                            <select class="form-control" id="id_brand" name="id_brand" required>
-                                     <option value="">-- Select Kategori --</option>
-                                      @foreach  ($brands as $brand)
-                                            <option value="{{ $brand->id }}">{{ $brand->nama_brand }}</option>
-                                        @endforeach
-                                     </select>
+                                <select class="form-control" id="barcode" name="barcode" required>
+                                    <option value="">-- Select Barcode Type --</option>
+                                    <option value="Code25">Code25</option>
+                                    <option value="Code39">Code39</option>
+                                    <option value="Code128">Code128</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
-                             <label for="id_kategori" class="col-sm-2 control-label">Kategori</label>
-                                 <div class="col-sm-12">
-                                      <select class="form-control" id="id_kategori" name="id_kategori" required>
-                                     <option value="">-- Select Kategori --</option>
-                                      @foreach  ($kategoris as $kategori)
-                                            <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
-                                        @endforeach
-                                     </select>
-                             </div>
+                            <label for="id_brand" class="col-sm-2 control-label">id_brand</label>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="id_brand" name="id_brand" required>
+                                    <option value="">-- Select Kategori --</option>
+                                    @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->nama_brand }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_kategori" class="col-sm-2 control-label">Kategori</label>
+                            <div class="col-sm-12">
+                                <select class="form-control" id="id_kategori" name="id_kategori" required>
+                                    <option value="">-- Select Kategori --</option>
+                                    @foreach ($kategoris as $kategori)
+                                    <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="id_unit" class="col-sm-2 control-label">id_unit</label>
                             <div class="col-sm-12">
-                            <select class="form-control" id="id_unit" name="id_unit" required>
-                                     <option value="">-- Select Kategori --</option>
-                                      @foreach  ($units as $unit)
-                                            <option value="{{ $unit->id }}">{{ $unit->nama_unit }}</option>
-                                        @endforeach
-                                     </select>
+                                <select class="form-control" id="id_unit" name="id_unit" required>
+                                    <option value="">-- Select Kategori --</option>
+                                    @foreach ($units as $unit)
+                                    <option value="{{ $unit->id }}">{{ $unit->nama_unit }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -130,14 +130,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                             <label for="image" class="col-sm-2 control-label">Image</label>
-                               <div class="col-sm-12">
-                                    <input type="file" name="image" accept="image/*">
-                                     @if(isset($product->image_url))
-                                          <img src="{{ asset('storage/' . $product->image_url) }}" alt="Product Image" style="max-width: 200px; margin-top: 10px;">
-                                     @endif
-                              </div>
-                       </div>
+                            <label for="image" class="col-sm-2 control-label">Image</label>
+                            <div class="col-sm-12">
+                                <input type="file" name="image" accept="image/*">
+                                @if(isset($product->image))
+                                <img src="{{ Storage::url($product->image) }}" alt="Product Image" style="max-width: 200px; margin-top: 10px;">
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary" id="btn-save">Save Changes
@@ -168,21 +168,61 @@
             processing: true,
             serverSide: true,
             ajax: "{{ url('product') }}",
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'nama_product', name: 'nama_product' },
-                { data: 'slug', name: 'slug' },
-                { data: 'secondary_name', name: 'secondary_name' },
-                { data: 'weight', name: 'weight' },
-                { data: 'barcode', name: 'barcode' },
-                { data: 'id_brand', name: 'id_brand' },
-                { data: 'id_kategori', name: 'id_kategori' },
-                { data: 'id_unit', name: 'id_unit' },
-                { data: 'price', name: 'price' },
-                { data: 'image', name: 'image', orderable: false, searchable: false },
-                { data: 'action', name: 'action', orderable: false },
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'nama_product',
+                    name: 'nama_product'
+                },
+                {
+                    data: 'slug',
+                    name: 'slug'
+                },
+                {
+                    data: 'secondary_name',
+                    name: 'secondary_name'
+                },
+                {
+                    data: 'weight',
+                    name: 'weight'
+                },
+                {
+                    data: 'barcode',
+                    name: 'barcode'
+                },
+                {
+                    data: 'brand',
+                    name: 'brand'
+                },
+                {
+                    data: 'kategori',
+                    name: 'kategori'
+                },
+                {
+                    data: 'unit',
+                    name: 'unit'
+                },
+                {
+                    data: 'price',
+                    name: 'price'
+                },
+                {
+                    data: 'image',
+                    name: 'image',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false
+                },
             ],
-            order: [[0, 'desc']]
+            order: [
+                [0, 'desc']
+            ]
         });
     });
 
@@ -197,7 +237,9 @@
         $.ajax({
             type: "POST",
             url: "{{ url('edit-product') }}",
-            data: { id: id },
+            data: {
+                id: id
+            },
             dataType: 'json',
             success: function(res) {
                 $('#productModal').html("Edit product");
@@ -230,7 +272,9 @@
                 $.ajax({
                     type: "POST",
                     url: "{{ url('delete-product') }}",
-                    data: { id: id },
+                    data: {
+                        id: id
+                    },
                     dataType: 'json',
                     success: function(res) {
                         $('#product').DataTable().ajax.reload(null, false);

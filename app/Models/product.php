@@ -19,7 +19,22 @@ class product extends Model
         'id_kategori',
         'id_unit',
         'price',
+        'image'
         
     ];
+
+   
+public function brand() {
+    return $this->belongsTo(Brand::class, 'id_brand');
+}
+
+public function kategori() {
+    return $this->belongsTo(Kategori::class, 'id_kategori');
+}
+
+public function unit() {
+    return $this->belongsTo(Unit::class, 'id_unit');
+}
+
 
 }

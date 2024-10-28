@@ -7,6 +7,7 @@ use App\Models\kategori;
 use App\Models\unit;
 use App\Models\brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use Datatables;
 
@@ -20,21 +21,32 @@ class productController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            //return datatables()->of(product::select('*'))
-            return datatables()->of(product::select('id', 'nama_product', 'slug','secondary_name','weight', 'barcode', 'id_brand','id_kategori','id_unit','price','image'))
+            return datatables()->of(Product::with(['brand', 'kategori', 'unit'])
+                ->select('id', 'nama_product', 'slug', 'secondary_name', 'weight', 'barcode', 'id_brand', 'id_kategori', 'id_unit', 'price', 'image'))
                 ->addColumn('image', function ($product) {
-                return '<img src="' . asset('storage/' . $product->image) . '" style="max-width: 50px;"/>'; })    
+                    return '<img src="' . asset('storage/' . $product->image) . '" style="max-width: 50px;"/>';
+                })
+                ->addColumn('brand', function ($product) {
+                    return $product->brand ? $product->brand->nama_brand : '-';
+                })
+                ->addColumn('kategori', function ($product) {
+                    return $product->kategori ? $product->kategori->nama_kategori : '-';
+                })
+                ->addColumn('unit', function ($product) {
+                    return $product->unit ? $product->unit->nama_unit : '-';
+                })
                 ->addColumn('action', 'content.product.product-action')
                 ->rawColumns(['image', 'action'])
                 ->addIndexColumn()
                 ->make(true);
         }
-        
+
         $kategoris = Kategori::all();
-        $brands = Brand::all(); 
-        $units = Unit::all(); 
+        $brands = Brand::all();
+        $units = Unit::all();
         return view('content.product.manage', compact('kategoris', 'brands', 'units'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -57,7 +69,7 @@ class productController extends Controller
             'id_unit' => 'required',
             'price' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-         
+
         ]);
 
         $imagePath = null;
@@ -81,7 +93,7 @@ class productController extends Controller
                 'id_unit' => $request->id_unit,
                 'price' => $request->price,
                 'image' => $imagePath
-                
+
             ]
         );
 
@@ -109,20 +121,27 @@ class productController extends Controller
      */
     public function destroy(Request $request)
     {
-        $product = product::where('id', $request->id)->delete();
+        // Ambil produk yang akan dihapus berdasarkan ID
+        $product = Product::where('id', $request->id)->first();
 
-        
-        if (!$product) {
-            return response()->json([
-                "status" => "failed",
-                "msg" => "Something went wrong!"
-            ], 210);
-        } else {
+        if ($product) {
+
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+
+
+            $product->delete();
+
             return response()->json([
                 "status" => "success",
                 "msg" => "Product Deleted Successfully"
             ], 201);
+        } else {
+            return response()->json([
+                "status" => "failed",
+                "msg" => "Something went wrong!"
+            ], 210);
         }
     }
-    
 }
