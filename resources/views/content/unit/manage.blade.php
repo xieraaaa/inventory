@@ -2,12 +2,25 @@
 
 @section('content')
 <div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h4 class="text-themecolor">Unit</h4>
+            </div>
+            <div class="col-md-7 align-self-center text-end">
+                <div class="d-flex justify-content-end align-items-center">
+                    <ol class="breadcrumb justify-content-end">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item">setting</li>
+                        <li class="breadcrumb-item active">Unit</li>
+                    </ol>
+                   
+                </div>
+            </div>
+        </div>
     <div class="container">
         <div class="row mt-2">
             <div class="col-md-12">
-                <div class="pull-left">
-                    <h2>unit</h2>
-                </div>
                 <div class="mb-3">
                     <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Create unit</a>
                 </div>
