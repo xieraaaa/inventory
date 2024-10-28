@@ -18,7 +18,7 @@
                         </li>
                         <li class="nav-small-cap">--- PERSONAL</li>
                         <li> <a class="waves-effect waves-dark" href="{{route('dashboard.index')}}"><i class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a>
-                        <li> <a class="waves-effect waves-dark" href="#"><i class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a>
+                        <li> <a class="waves-effect waves-dark" href="{{route('product')}}"><i class="fa-solid fa-barcode"></i></i><span class="hide-menu">Product</span></a>
                         <li> <a class="waves-effect waves-dark" href="#"><i class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a>
                         <li> <a class="waves-effect waves-dark" href="#"><i class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a>
                         <li> <a class="waves-effect waves-dark" href="#"><i class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a>

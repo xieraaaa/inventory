@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 use Datatables;
 
-class productController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
