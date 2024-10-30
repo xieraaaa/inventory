@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,9 +12,10 @@
 |
 */
 
-$app = new Illuminate\Foundation\Application(
+$app = (new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
-);
+));
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +55,5 @@ $app->singleton(
 */
 
 return $app;
+
+

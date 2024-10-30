@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\BrandController;
+use App\Http\Controllers\Account;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\UnitController;
-use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,11 +48,34 @@ Route::get('product', [productController::class, 'index'])->name('product');
 Route::post('store-product', [productController::class, 'store']);
 Route::post('edit-product', [productController::class, 'edit']);
 Route::post('delete-product', [productController::class, 'destroy']);
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('auth.register');
+});
+
+Route::get('/dashboard', function () {
+     return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 
+require __DIR__.'/auth.php';
 
-
-
-
-
-Route::get('/', [Dashboard::class, 'index'])->name('dashboard.index');
+Route::middleware('admin')->group(function () {
+Route::get('admin/dashboard', [HomeController::class, 'index'])->middleware(['auth','admin'])->name('admin.dashboard');
+});

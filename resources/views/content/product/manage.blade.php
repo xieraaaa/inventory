@@ -35,9 +35,9 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nama_product</th>
+                        <th>product name</th>
                         <th>slug</th>
-                        <th>secondary_name</th>
+                        <th>secondary name</th>
                         <th>weight</th>
                         <th>barcode</th>
                         <th>brand</th>
@@ -63,35 +63,35 @@
                         method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">
-                            <label for="nama_product" class="col-sm-2 control-label">nama product</label>
+                            <label for="nama_product" class="col-sm-8 mb-2 control-label">nama product</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="nama_product" name="nama_product"
                                     placeholder="product Name" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="slug" class="col-sm-2 control-label">slug</label>
+                            <label for="slug" class="col-sm-8 mb-2 control-label">slug</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="slug" name="slug"
                                     placeholder="slug" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="secondary_name" class="col-sm-2 control-label">secondary_name</label>
+                            <label for="secondary_name" class="col-sm-8 mb-2 control-label">secondary name</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="secondary_name" name="secondary_name"
                                     placeholder="Code of secondary_name" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="weight" class="col-sm-2 control-label">weight</label>
+                            <label for="weight" class="col-sm-8 mb-2 control-label">weight</label>
                             <div class="col-sm-12">
                                 <input type="number" class="form-control" id="weight" name="weight"
                                     placeholder="Code of weight" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="barcode" class="col-sm-2 control-label">Barcode</label>
+                            <label for="barcode" class="col-sm-8 mb-2 control-label">Barcode</label>
                             <div class="col-sm-12">
                                 <select class="form-control" id="barcode" name="barcode" required>
                                     <option value="">-- Select Barcode Type --</option>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="id_brand" class="col-sm-2 control-label">id_brand</label>
+                            <label for="id_brand" class="col-sm-8 mb-2 control-label">brand</label>
                             <div class="col-sm-12">
                                 <select class="form-control" id="id_brand" name="id_brand" required>
                                     <option value="">-- Select Kategori --</option>
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="id_kategori" class="col-sm-2 control-label">Kategori</label>
+                            <label for="id_kategori" class="col-sm-8 mb-2 control-label">Kategori</label>
                             <div class="col-sm-12">
                                 <select class="form-control" id="id_kategori" name="id_kategori" required>
                                     <option value="">-- Select Kategori --</option>
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="id_unit" class="col-sm-2 control-label">id_unit</label>
+                            <label for="id_unit" class="col-sm-8 mb-2 control-label">unit</label>
                             <div class="col-sm-12">
                                 <select class="form-control" id="id_unit" name="id_unit" required>
                                     <option value="">-- Select Kategori --</option>
@@ -135,14 +135,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="price" class="col-sm-2 control-label">price</label>
+                            <label for="price" class="col-sm-8 mb-2 control-label">price</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="price" name="price"
                                     placeholder="Code of price" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="image" class="col-sm-2 control-label">Image</label>
+                            <label for="image" class="col-sm-8 mb-2 control-label">Image</label>
                             <div class="col-sm-12">
                                 <input type="file" name="image" accept="image/*">
                                 @if(isset($product->image))
