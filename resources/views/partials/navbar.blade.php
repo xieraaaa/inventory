@@ -311,16 +311,22 @@
             <!-- ============================================================== -->
             <li class="nav-item dropdown u-pro">
                 <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href=""
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                        src="../assets/images/users/1.jpg" alt="user" class=""> <span
-                        class="hidden-md-down">{{ Auth::user()->name }} &nbsp;<i class="fa fa-angle-down"></i></span>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @if (auth()->user()->profile_photo)
+                        <img src="{{ asset('storage/profile_photos/' . auth()->user()->profile_photo) }}"
+                            alt="Profile Photo" class="profile-photo image-circle">
+                    @else
+                        <img src="{{ asset('../assets/images/unknown.jpg') }}" alt="Default Profile Photo"
+                            class="profile-photo image-circle">
+                    @endif <span class="hidden-md-down">{{ Auth::user()->name }} &nbsp;<i
+                            class="fa fa-angle-down"></i></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end animated flipInY">
                     <a href="{{ route('profile.edit') }}" class="dropdown-item"><i class="fa-solid fa-user"></i></i>
                         Profile</a>
 
                     <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-                    <!-- text-->                    
+                    <!-- text-->
                     <!-- text-->
                     <div class="dropdown-divider"></div>
                     <!-- text-->

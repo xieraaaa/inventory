@@ -13,7 +13,7 @@
             @csrf
         </form>
 
-        <form method="post" action="{{ route('profile.update') }}" class="mt-4 needs-validation" novalidate>
+        <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="mt-4 needs-validation" novalidate>
             @csrf
             @method('patch')
 
@@ -46,6 +46,11 @@
                 @endif
             </div>
 
+            <div class="mb-3">
+                <label for="profile_photo" class="form-label">Foto Profil</label>
+                <input type="file" class="form-control" id="profile_photo" name="profile_photo">
+            </div>
+
             <div class="d-flex align-items-center gap-3">
                 <x-primary-button class="btn btn-primary">{{ __('Save') }}</x-primary-button>
 
@@ -62,4 +67,3 @@
         </form>
     </div>
 </section>
-

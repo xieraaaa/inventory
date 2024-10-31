@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -26,13 +27,37 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        // Validasi tambahan untuk foto profil
+        $validatedData = $request->validated();
+        $request->validate([
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user = $request->user();
+
+        // Update data profil lain
+        $user->fill($validatedData);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        // Jika ada file foto profil yang di-upload
+        if ($request->hasFile('profile_photo')) {
+            // Hapus foto profil lama jika ada
+            if ($user->profile_photo) {
+                Storage::delete('public/profile_photos/' . $user->profile_photo);
+            }
+
+            // Simpan foto profil yang baru
+            $profilePhotoName = $user->id . '_profile_' . time() . '.' . $request->profile_photo->extension();
+            $request->profile_photo->storeAs('public/profile_photos', $profilePhotoName);
+
+            // Update kolom profile_photo di database
+            $user->profile_photo = $profilePhotoName;
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
@@ -48,7 +73,13 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        // Logout dan hapus akun pengguna
         Auth::logout();
+
+        // Hapus foto profil pengguna jika ada
+        if ($user->profile_photo) {
+            Storage::delete('public/profile_photos/' . $user->profile_photo);
+        }
 
         $user->delete();
 
@@ -57,6 +88,4 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-
-    
 }

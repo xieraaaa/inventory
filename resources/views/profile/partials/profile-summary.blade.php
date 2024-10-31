@@ -1,11 +1,13 @@
 <div class="profile-summary text-center">
     <!-- Profile Picture -->
-    <div class="mb-3">
-        <img src="{{ Auth::user()->profile_picture_url ?? asset('images/default-profile.png') }}" alt="Profile Picture" class="rounded-circle" width="100" height="100">
-    </div>
+    @if(auth()->user()->profile_photo)
+    <img src="{{ asset('storage/profile_photos/' . auth()->user()->profile_photo) }}" alt="Profile Photo" class="profile-photo rounded-circle" width="200" height="200">
+    @else
+    <img src="{{ asset('../assets/images/unknown.jpg') }}" alt="Default Profile Photo" class="profile-photo rounded-circle" width="200" height="200">
+@endif
 
     <!-- User Name -->
-    <h4>{{ Auth::user()->name }}</h4>
+    <h4 class="mt-3">{{ Auth::user()->name }}</h4>
 
     <!-- User Email -->
     <p class="text-muted">{{ Auth::user()->email }}</p>
@@ -17,3 +19,5 @@
     </div>
 
 </div>
+
+
