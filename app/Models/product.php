@@ -11,6 +11,7 @@ class product extends Model
 
     protected $fillable = [
         'nama_product',
+        'code_product',
         'slug',
         'secondary_name',
         'weight',
@@ -36,5 +37,9 @@ public function unit() {
     return $this->belongsTo(Unit::class, 'id_unit');
 }
 
+public static function generateBarcode($namaProduct)
+    {
+        return substr(md5($namaProduct), 0, 12); // Menghasilkan barcode unik dari nama produk
+    }
 
 }
