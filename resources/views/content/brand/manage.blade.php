@@ -10,7 +10,7 @@
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
                                 <li class="breadcrumb-item">setting</li>
                                 <li class="breadcrumb-item active">Brand</li>
                             </ol>

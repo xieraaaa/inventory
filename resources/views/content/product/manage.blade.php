@@ -10,7 +10,7 @@
             <div class="col-md-7 align-self-center text-end">
                 <div class="d-flex justify-content-end align-items-center">
                     <ol class="breadcrumb justify-content-end">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
                         <li class="breadcrumb-item active">Product</li>
                     </ol>
                    
@@ -34,17 +34,17 @@
             <table class="table table-striped table-bordered yajra-datatable" id="product">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Product Name</th>
-                        <th>Slug</th>
-                        <th>Secondary Name</th>
-                        <th>Weight</th>
-                        <th>Barcode</th>
-                        <th>Brand</th>
-                        <th>Kategori</th>
-                        <th>Unit</th>
-                        <th>Price</th>
-                        <th>Image</th>
+                        <th>Id</th>
+                        <th>product name</th>
+                        <th>slug</th>
+                        <th>secondary name</th>
+                        <th>weight</th>
+                        <th>barcode</th>
+                        <th>brand</th>
+                        <th>kategori</th>
+                        <th>unit</th>
+                        <th>price</th>
+                        <th>image</th>
                         <th width="150px">Action</th>
                     </tr>
                 </thead>
@@ -63,28 +63,28 @@
                         method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">
-                            <label for="nama_product" class="col-sm-8 mb-2 control-label">Nama Product</label>
+                            <label for="nama_product" class="col-sm-8 mb-2 control-label">nama product</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="nama_product" name="nama_product"
                                     placeholder="product Name" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="slug" class="col-sm-8 mb-2 control-label">Slug</label>
+                            <label for="slug" class="col-sm-8 mb-2 control-label">slug</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="slug" name="slug"
                                     placeholder="slug" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="secondary_name" class="col-sm-8 mb-2 control-label">Secondary Name</label>
+                            <label for="secondary_name" class="col-sm-8 mb-2 control-label">secondary name</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="secondary_name" name="secondary_name"
                                     placeholder="Code of secondary_name" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="weight" class="col-sm-8 mb-2 control-label">Weight</label>
+                            <label for="weight" class="col-sm-8 mb-2 control-label">weight</label>
                             <div class="col-sm-12">
                                 <input type="number" class="form-control" id="weight" name="weight"
                                     placeholder="Code of weight" maxlength="50" required="">
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="id_brand" class="col-sm-8 mb-2 control-label">Brand</label>
+                            <label for="id_brand" class="col-sm-8 mb-2 control-label">brand</label>
                             <div class="col-sm-12">
                                 <select class="form-control" id="id_brand" name="id_brand" required>
                                     <option value="">-- Select Kategori --</option>
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="id_unit" class="col-sm-8 mb-2 control-label">Unit</label>
+                            <label for="id_unit" class="col-sm-8 mb-2 control-label">unit</label>
                             <div class="col-sm-12">
                                 <select class="form-control" id="id_unit" name="id_unit" required>
                                     <option value="">-- Select Kategori --</option>
@@ -135,7 +135,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="price" class="col-sm-8 mb-2 control-label">Price</label>
+                            <label for="price" class="col-sm-8 mb-2 control-label">price</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="price" name="price"
                                     placeholder="Code of price" maxlength="50" required="">
