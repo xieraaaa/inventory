@@ -34,17 +34,17 @@
             <table class="table table-striped table-bordered yajra-datatable" id="product">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>product name</th>
-                        <th>slug</th>
-                        <th>secondary name</th>
-                        <th>weight</th>
-                        <th>barcode</th>
-                        <th>brand</th>
-                        <th>kategori</th>
-                        <th>unit</th>
-                        <th>price</th>
-                        <th>image</th>
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Slug</th>
+                        <th>Secondary Name</th>
+                        <th>Weight</th>
+                        <th>Barcode</th>
+                        <th>Brand</th>
+                        <th>Kategori</th>
+                        <th>Unit</th>
+                        <th>Price</th>
+                        <th>Image</th>
                         <th width="150px">Action</th>
                     </tr>
                 </thead>
@@ -63,28 +63,28 @@
                         method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">
-                            <label for="nama_product" class="col-sm-8 mb-2 control-label">nama product</label>
+                            <label for="nama_product" class="col-sm-8 mb-2 control-label">Nama Product</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="nama_product" name="nama_product"
                                     placeholder="product Name" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="slug" class="col-sm-8 mb-2 control-label">slug</label>
+                            <label for="slug" class="col-sm-8 mb-2 control-label">Slug</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="slug" name="slug"
                                     placeholder="slug" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="secondary_name" class="col-sm-8 mb-2 control-label">secondary name</label>
+                            <label for="secondary_name" class="col-sm-8 mb-2 control-label">Secondary Name</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="secondary_name" name="secondary_name"
                                     placeholder="Code of secondary_name" maxlength="50" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="weight" class="col-sm-8 mb-2 control-label">weight</label>
+                            <label for="weight" class="col-sm-8 mb-2 control-label">Weight</label>
                             <div class="col-sm-12">
                                 <input type="number" class="form-control" id="weight" name="weight"
                                     placeholder="Code of weight" maxlength="50" required="">
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="id_brand" class="col-sm-8 mb-2 control-label">brand</label>
+                            <label for="id_brand" class="col-sm-8 mb-2 control-label">Brand</label>
                             <div class="col-sm-12">
                                 <select class="form-control" id="id_brand" name="id_brand" required>
                                     <option value="">-- Select Kategori --</option>
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="id_unit" class="col-sm-8 mb-2 control-label">unit</label>
+                            <label for="id_unit" class="col-sm-8 mb-2 control-label">Unit</label>
                             <div class="col-sm-12">
                                 <select class="form-control" id="id_unit" name="id_unit" required>
                                     <option value="">-- Select Kategori --</option>
@@ -135,7 +135,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="price" class="col-sm-8 mb-2 control-label">price</label>
+                            <label for="price" class="col-sm-8 mb-2 control-label">Price</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="price" name="price"
                                     placeholder="Code of price" maxlength="50" required="">
