@@ -92,9 +92,11 @@ Route::get('brand', [BrandController::class, 'index'])->name('brand');
 Route::post('store-brand', [BrandController::class, 'store']);
 Route::post('edit-brand', [BrandController::class, 'edit']);
 Route::post('delete-brand', [BrandController::class, 'destroy']);
+Route::post('/brand/import', [BrandController::class, 'import'])->name('brand.import');
 
 Route::get('product', [productController::class, 'index'])->name('product');
 Route::post('store-product', [productController::class, 'store']);
 Route::post('edit-product', [productController::class, 'edit']);
 Route::post('delete-product', [productController::class, 'destroy']);
+
 });
