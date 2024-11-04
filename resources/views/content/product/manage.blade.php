@@ -17,20 +17,20 @@
                 </div>
             </div>
         </div>
-    <div class="container">
-        <div class="row mt-2">
-            <div class="col-md-12">
-                <div class="mb-3">
-                    <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Create product</a>
-                </div>
-            </div>
-        </div>
+
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif
-        <div class="card-body">
+        <div class="card p-3 rounded">
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Create product</a>
+                    </div>
+                </div>
+            </div>
             <table class="table table-striped table-bordered yajra-datatable" id="product">
                 <thead>
                     <tr>
@@ -162,7 +162,7 @@
         </div>
     </div>
     <!-- End bootstrap model -->
-</div>
+
 @endsection
 
 @push('scripts')
@@ -179,6 +179,7 @@
         $('#product').DataTable({
             processing: true,
             serverSide: true,
+            Scrollx: true,
             ajax: "{{ url('product') }}",
             columns: [{
                     data: 'id',

@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                <div class="container">
+                <div class="card p-3 rounded">
                     <div class="row mt-2">
                         <div class="col-md-12">
                             <div class="mb-3">
@@ -32,7 +32,6 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
-                    <div class="card-body">
                         <table class="table table-striped table-bordered yajra-datatable" id="brand">
                             <thead>
                                 <tr>

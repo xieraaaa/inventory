@@ -60,7 +60,7 @@ Route::post('delete-product', [productController::class, 'destroy']);
 */
 
 Route::get('/', function () {
-    return view('auth.register');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -78,4 +78,23 @@ require __DIR__.'/auth.php';
 
 Route::middleware('admin')->group(function () {
 Route::get('admin/dashboard', [HomeController::class, 'index'])->middleware(['auth','admin'])->name('admin.dashboard');
+Route::get('kategori', [KategoriController::class, 'index'])->name('kategori');
+Route::post('store-kategori', [KategoriController::class, 'store']);
+Route::post('edit-kategori', [KategoriController::class, 'edit']);
+Route::post('delete-kategori', [KategoriController::class, 'destroy']);
+
+Route::get('unit', [UnitController::class, 'index'])->name('unit');
+Route::post('store-unit', [UnitController::class, 'store']);
+Route::post('edit-unit', [UnitController::class, 'edit']);
+Route::post('delete-unit', [UnitController::class, 'destroy']);
+
+Route::get('brand', [BrandController::class, 'index'])->name('brand');
+Route::post('store-brand', [BrandController::class, 'store']);
+Route::post('edit-brand', [BrandController::class, 'edit']);
+Route::post('delete-brand', [BrandController::class, 'destroy']);
+
+Route::get('product', [productController::class, 'index'])->name('product');
+Route::post('store-product', [productController::class, 'store']);
+Route::post('edit-product', [productController::class, 'edit']);
+Route::post('delete-product', [productController::class, 'destroy']);
 });
